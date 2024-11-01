@@ -17,3 +17,8 @@ class SearchToPage:
         """locator(str): Осуществляется поиск по локатору, возвращает список"""
         self.locator = locator
         return self.driver.find_elements(By.CSS_SELECTOR, locator)
+    
+    def add_to_bag(self, name_item:str):
+        self.driver.find_element(By.CSS_SELECTOR, f"#add-to-cart-{name_item.lower().replace(" ", "-")}").click()
+
+    
