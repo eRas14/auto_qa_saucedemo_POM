@@ -11,39 +11,27 @@ main = MainPage(driver)
 search_to_page = SearchToPage(driver)
 manager.configurate(2)
 
+#go to site
 main.get_page("https://www.saucedemo.com/")
 
 #autorization
-search_to_page.search_element("#user-name").send_keys("standard_user")
-search_to_page.search_element("#password").send_keys("secret_sauce")
-search_to_page.search_element("#login-button").click()
+main.autorization("standard_user","secret_sauce")
 
-items_list = ["Sauce Labs Backpack", "Sauce Labs Bolt T-Shirt", "Sauce Labs Onesie"]
+#add to cart
+search_to_page.add_to_bag("Sauce Labs Backpack")
+search_to_page.add_to_bag("Sauce Labs Bolt T-Shirt")
 
-all_items_in_page = search_to_page.search_elements(".inventory_item_description")
+#cart
+main.go_to_cart()
 
-print(all_items_in_page[0].text)
-
-#add items to корзина
-for i in range (len(all_items_in_page)):
-    if all_items_in_page[i].find_element(By.CSS_SELECTOR, ".inventory_item_name").text in items_list:
-        all_items_in_page[i].find_element(By.CSS_SELECTOR, ".btn").click()
-        
-
-search_to_page.search_element(".shopping_cart_link").click() #Press Corzina
-search_to_page.search_element("#checkout").click() # Press Checkout
+#click_checkout
+main.click_checkout()
 
 #input user_info
-search_to_page.search_element("#first-name").send_keys("Albert")
-search_to_page.search_element("#last-name").send_keys("Urazov")
-search_to_page.search_element("#postal-code").send_keys("460048")
+main.add_user_info("Albert", "Urazov", "460048")
 
 #Press continue
-search_to_page.search_element("#continue").click()
-
-#take total cost
-total_cost = search_to_page.search_element(".summary_total_label").text
+main.click_continue()
 
 manager.quit_browser()
 
-print(total_cost)
