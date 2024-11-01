@@ -4,6 +4,8 @@
 ### -Заполнение формы для оформления заказа 
 ### -Извлечение итоговой стоимости
 
+```
+
 from Pages.DriverManager import DriverManager
 from Pages.MainPage import MainPage
 from Pages.SearchPage import SearchToPage
